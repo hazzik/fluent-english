@@ -26,5 +26,23 @@ namespace Hazzik.FluentEnglishTimes.Test
 			var verb = Verb.Create("lie");
 			Assert.Equal("lying", verb.GetVIng());
 		}
+
+		[Fact]
+// ReSharper disable InconsistentNaming
+		public void EdAfterEInV3()
+// ReSharper restore InconsistentNaming
+		{
+			var verb = Verb.Create("love");
+			Assert.Equal("loved", verb.GetV3());
+		}
+
+		[Fact]
+// ReSharper disable InconsistentNaming
+		public void EdAfterEInV2()
+// ReSharper restore InconsistentNaming
+		{
+			var verb = Verb.Create("love");
+			Assert.Equal("loved", verb.GetV2());
+		}
 	}
 }

@@ -7,7 +7,7 @@ namespace Hazzik.FluentEnglishTimes
 {
 	public class Verb : Word
 	{
-		private static readonly string[] Ends = new[] {"o", "j", "ch", "s", "sh", "z", "zs"};
+		private static readonly string[] Ends = new[] {"o", "j", "s", "x", "z", "ch", "sh", "zs"};
 
 		private static readonly char[] Vowels = new[] {'a', 'e', 'i', 'o', 'u', 'y'};
 
