@@ -88,12 +88,12 @@ namespace Hazzik.FluentEnglishTimes
 		public override string ToString()
 		{
 			FirstVerb.PersonNumber = GetPersonNumber(words.ToList()[0]);
-			return string.Join(" ", words.Select(w => w.ToString()).ToArray());
+			return string.Join(" ", words.Select(w => w.ToString(state)));
 		}
 
-		private static VerbPersonNumber GetPersonNumber(Word noun)
+		private VerbPersonNumber GetPersonNumber(Word noun)
 		{
-			switch (noun.ToString())
+			switch (noun.ToString(state))
 			{
 				case "I":
 					{

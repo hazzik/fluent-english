@@ -8,36 +8,33 @@ namespace Hazzik.FluentEnglishTimes.Verbs
 		{
 		}
 
-		public override string V1
+		public override string GetV1(SentenceState state)
 		{
-			get
+			switch (PersonNumber)
 			{
-				switch (PersonNumber)
-				{
-					case VerbPersonNumber.FirstSingular:
-						return "am";
-					case VerbPersonNumber.ThirdSingular:
-						return "is";
-					case VerbPersonNumber.Plural:
-						return "are";
-				}
-				return base.V1;
+				case VerbPersonNumber.FirstSingular:
+					return "am";
+				case VerbPersonNumber.ThirdSingular:
+					return "is";
+				case VerbPersonNumber.Plural:
+					return "are";
 			}
+			return "be";
 		}
 
-		public override string V2
+		public override string GetV2()
 		{
-			get { return PersonNumber == VerbPersonNumber.Plural ? "were" : "was"; }
+			return PersonNumber == VerbPersonNumber.Plural ? "were" : "was";
 		}
 
-		public override string V3
+		public override string GetV3()
 		{
-			get { return "been"; }
+			return "been";
 		}
 
-		public override string VIng
+		public override string GetVIng()
 		{
-			get { return "being"; }
+			return "being";
 		}
 
 		protected override Verb Clone()

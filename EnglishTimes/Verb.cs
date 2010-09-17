@@ -7,39 +7,106 @@ namespace Hazzik.FluentEnglishTimes
 {
 	public class Verb : Word
 	{
+		private static readonly string[] Ends = new[] {"o", "j", "ch", "s", "sh", "z", "zs"};
+
+		private static readonly char[] Vowels = new[] {'a', 'e', 'i', 'o', 'u', 'y'};
+
 		private static readonly IList<Verb> Verbs = InitVerbs();
+
+		private readonly string v1;
+
+		private readonly string v2;
+
+		private readonly string v3;
+
+		private readonly string vIng;
+
+		private readonly string presentSimpleThirdSingular;
 
 		protected Verb(string v1, string v2, string v3) : base(v1)
 		{
 			PersonNumber = VerbPersonNumber.Infinitive;
 			Form = VerbForms.V1;
-			V1 = v1;
-			V2 = v2;
-			V3 = v3;
-			VIng = v1 + "ing";
+			this.v1 = v1;
+			this.v2 = v2;
+			this.v3 = v3;
+			vIng = CreateVIngForm(v1);
+			presentSimpleThirdSingular = CreatePresentSimpleThirdSingularForm(v1);
 		}
 
-		public virtual string V1 { get; private set; }
-		public virtual string V2 { get; private set; }
-		public virtual string V3 { get; private set; }
-		public virtual string VIng { get; private set; }
+		private static string CreateVIngForm(string v1)
+		{
+			if (v1.EndsWith("ie"))
+			{
+				return v1.Substring(0, v1.Length - 2) + "ying";
+			}
+			if (v1.EndsWith("e") && v1.EndsWith("ee") == false)
+			{
+				return v1.Substring(0, v1.Length - 1) + "ing";
+			}
+			return v1 + "ing";
+		}
 
 		public VerbForms Form { get; set; }
 
 		public VerbPersonNumber PersonNumber { get; set; }
 
-		public override string ToString()
+		public virtual string GetV1(SentenceState state)
+		{
+			if (state == SentenceState.None && PersonNumber == VerbPersonNumber.ThirdSingular)
+			{
+				return presentSimpleThirdSingular;
+			}
+			return v1;
+		}
+
+		private static string CreatePresentSimpleThirdSingularForm(string infinitive)
+		{
+			if (infinitive.EndsWith("y"))
+			{
+				var substring = infinitive.Substring(0, infinitive.Length - 1);
+				var lastOrDefault = char.ToLower(substring.LastOrDefault());
+				if (Vowels.Contains(lastOrDefault))
+				{
+					return infinitive + "s";
+				}
+
+				return substring + "ies";
+			}
+
+			if (Ends.Any(infinitive.EndsWith))
+				return infinitive + "es";
+
+			return infinitive + "s";
+		}
+
+		public virtual string GetV2()
+		{
+			return v2;
+		}
+
+		public virtual string GetV3()
+		{
+			return v3;
+		}
+
+		public virtual string GetVIng()
+		{
+			return vIng;
+		}
+
+		public override string ToString(SentenceState state)
 		{
 			switch (Form)
 			{
 				case VerbForms.V1:
-					return V1;
+					return GetV1(state);
 				case VerbForms.V2:
-					return V2;
+					return GetV2();
 				case VerbForms.V3:
-					return V3;
+					return GetV3();
 				case VerbForms.VIng:
-					return VIng;
+					return GetVIng();
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
@@ -67,12 +134,12 @@ namespace Hazzik.FluentEnglishTimes
 
 		public virtual bool IsMatch(string verbString)
 		{
-			return V1 == verbString || V2 == verbString || V3 == verbString;
+			return GetV1(SentenceState.None) == verbString || GetV2() == verbString || GetV3() == verbString;
 		}
 
 		protected virtual Verb Clone()
 		{
-			return new Verb(V1, V2, V3);
+			return new Verb(GetV1(SentenceState.None), GetV2(), GetV3());
 		}
 	}
 }

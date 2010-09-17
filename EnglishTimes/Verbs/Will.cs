@@ -8,14 +8,14 @@ namespace Hazzik.FluentEnglishTimes.Verbs
 		{
 		}
 
-		public override string V1
+		public override string GetV1(SentenceState state)
 		{
-			get { return PersonNumber == VerbPersonNumber.FirstSingular ? "shall" : base.V1; }
+			return PersonNumber == VerbPersonNumber.FirstSingular ? "shall" : "will";
 		}
 
-		public override string V2
+		public override string GetV2()
 		{
-			get { return PersonNumber == VerbPersonNumber.FirstSingular ? "should" : base.V2; }
+			return PersonNumber == VerbPersonNumber.FirstSingular ? "should" : "would";
 		}
 
 		protected override Verb Clone()

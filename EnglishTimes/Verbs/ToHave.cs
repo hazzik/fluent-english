@@ -4,28 +4,13 @@ namespace Hazzik.FluentEnglishTimes.Verbs
 {
 	internal class ToHave : Verb
 	{
-		public ToHave() : base(String.Empty, String.Empty, String.Empty)
+		public ToHave() : base("have", "had", "had")
 		{
 		}
 
-		public override string V1
+		public override string GetV1(SentenceState state)
 		{
-			get { return PersonNumber == VerbPersonNumber.ThirdSingular ? "has" : "have"; }
-		}
-
-		public override string V2
-		{
-			get { return "had"; }
-		}
-
-		public override string V3
-		{
-			get { return "had"; }
-		}
-
-		public override string VIng
-		{
-			get { return "having"; }
+			return PersonNumber == VerbPersonNumber.ThirdSingular ? "has" : "have";
 		}
 
 		public override bool IsMatch(string verbString)
