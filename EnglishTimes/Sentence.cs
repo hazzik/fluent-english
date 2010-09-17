@@ -6,55 +6,55 @@ namespace Hazzik.FluentEnglishTimes
 {
 	public class Sentence : IPassive
 	{
-		private readonly IList<Word> _words;
-		private SentenceState _state = SentenceState.None;
+		private readonly IList<Word> words;
+		private SentenceState state = SentenceState.None;
 
 		public Sentence(IList<Word> words)
 		{
-			_words = words;
+			this.words = words;
 		}
 
 		private Verb FirstVerb
 		{
-			get { return _words.OfType<Verb>().FirstOrDefault(); }
+			get { return words.OfType<Verb>().FirstOrDefault(); }
 		}
 
 		#region IPassive Members
 
 		public IActive Passive()
 		{
-			_state |= SentenceState.Passive;
+			state |= SentenceState.Passive;
 
 			FirstVerb.Form = VerbForms.V3;
 
-			_words.Insert(1, Verb.Create("be"));
+			words.Insert(1, Verb.Create("be"));
 
 			return this;
 		}
 
 		public IPerfect Progressive()
 		{
-			_state |= SentenceState.Progressive;
+			state |= SentenceState.Progressive;
 
 			FirstVerb.Form = VerbForms.VIng;
 
-			_words.Insert(1, Verb.Create("be"));
+			words.Insert(1, Verb.Create("be"));
 
 			return this;
 		}
 
 		public IFuture Perfect()
 		{
-			if ((_state & SentenceState.Passive) != 0 && (_state & SentenceState.Progressive) != 0)
+			if ((state & SentenceState.Passive) != 0 && (state & SentenceState.Progressive) != 0)
 			{
 				throw new NotSupportedException();
 			}
 
-			_state |= SentenceState.Perfect;
+			state |= SentenceState.Perfect;
 
 			FirstVerb.Form = VerbForms.V3;
 
-			_words.Insert(1, Verb.Create("have"));
+			words.Insert(1, Verb.Create("have"));
 
 			return this;
 		}
@@ -62,21 +62,21 @@ namespace Hazzik.FluentEnglishTimes
 
 		public IPast Future()
 		{
-			if ((_state & SentenceState.Passive) != 0 && (_state & SentenceState.Progressive) != 0)
+			if ((state & SentenceState.Passive) != 0 && (state & SentenceState.Progressive) != 0)
 			{
 				throw new NotSupportedException();
 			}
 
-			_state |= SentenceState.Future;
+			state |= SentenceState.Future;
 
-			_words.Insert(1, Verb.Create("will"));
+			words.Insert(1, Verb.Create("will"));
 
 			return this;
 		}
 
 		public void Past()
 		{
-			_state |= SentenceState.Past;
+			state |= SentenceState.Past;
 
 			FirstVerb.Form = VerbForms.V2;
 
@@ -87,8 +87,8 @@ namespace Hazzik.FluentEnglishTimes
 
 		public override string ToString()
 		{
-			FirstVerb.PersonNumber = GetPersonNumber(_words.ToList()[0]);
-			return string.Join(" ", _words.Select(w => w.ToString()).ToArray());
+			FirstVerb.PersonNumber = GetPersonNumber(words.ToList()[0]);
+			return string.Join(" ", words.Select(w => w.ToString()).ToArray());
 		}
 
 		private static VerbPersonNumber GetPersonNumber(Word noun)

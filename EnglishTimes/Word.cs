@@ -2,16 +2,16 @@ namespace Hazzik.FluentEnglishTimes
 {
 	public class Word
 	{
-		private readonly string _word;
+		private readonly string word;
 
 		public Word(string word)
 		{
-			_word = word;
+			this.word = word;
 		}
 
 		public override string ToString()
 		{
-			return _word;
+			return word;
 		}
 	}
 }

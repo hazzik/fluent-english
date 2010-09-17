@@ -7,7 +7,7 @@ namespace Hazzik.FluentEnglishTimes
 {
 	public class Verb : Word
 	{
-		private static readonly IList<Verb> _verbs = InitVerbs();
+		private static readonly IList<Verb> Verbs = InitVerbs();
 
 		protected Verb(string v1, string v2, string v3) : base(v1)
 		{
@@ -52,14 +52,14 @@ namespace Hazzik.FluentEnglishTimes
 			            		new ToBe(),
 			            		new ToHave(),
 			            		new Will(),
-			            		new Verb("do", "did", "done")
+			            		new ToDo()
 			            	};
 			return verbs;
 		}
 
 		public static Verb Create(string verbString)
 		{
-			Verb verb = (from v in _verbs
+			Verb verb = (from v in Verbs
 			             where v.IsMatch(verbString)
 			             select v).FirstOrDefault() ?? new RegularVerb(verbString);
 			return verb.Clone();

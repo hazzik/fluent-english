@@ -4,7 +4,7 @@ namespace Hazzik.FluentEnglishTimes.Verbs
 {
 	internal class ToBe : Verb
 	{
-		public ToBe() : base(String.Empty, String.Empty, String.Empty)
+		public ToBe() : base("be", String.Empty, String.Empty)
 		{
 		}
 

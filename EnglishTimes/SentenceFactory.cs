@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hazzik.FluentEnglishTimes
 {
@@ -11,31 +12,9 @@ namespace Hazzik.FluentEnglishTimes
 
 		private static List<Word> Parse(string sentence)
 		{
-			var words = new List<Word>();
-			int i = 0;
-			foreach (string w in sentence.Split(' '))
-			{
-				Word word;
-				if (i != 1) word = new Word(w);
-				else
-				{
-					if (w == "does")
-					{
-						word = Verb.Create("do");
-					}
-					else if (w == "am")
-					{
-						word = Verb.Create("be");
-					}
-					else
-					{
-						word = Verb.Create(w);
-					}
-				}
-				i++;
-				words.Add(word);
-			}
-			return words;
+			return sentence.Split(' ')
+				.Select((word, index) => index == 1 ? Verb.Create(word) : new Word(word))
+				.ToList();
 		}
 	}
 }
