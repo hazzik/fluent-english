@@ -9,7 +9,7 @@ namespace Hazzik.FluentEnglishTimes.Test
 		{
 			var verb = Verb.Create("worry");
 			verb.PersonNumber = VerbPersonNumber.ThirdSingular;
-			Assert.Equal("worries", verb.GetV1(SentenceState.None));
+			Assert.Equal("worries", verb.GetV1());
 		}
 
 		[Fact]
@@ -17,7 +17,7 @@ namespace Hazzik.FluentEnglishTimes.Test
 		{
 			var verb = Verb.Create("play");
 			verb.PersonNumber = VerbPersonNumber.ThirdSingular;
-			Assert.Equal("plays", verb.GetV1(SentenceState.None));
+			Assert.Equal("plays", verb.GetV1());
 		}
 
 		[Fact]

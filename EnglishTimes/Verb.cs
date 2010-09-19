@@ -23,15 +23,29 @@ namespace Hazzik.FluentEnglishTimes
 
 		private readonly string presentSimpleThirdSingular;
 
-		protected Verb(string v1, string v2, string v3) : base(v1)
+	    private readonly ICollection<string> forms = new List<string>();
+
+        protected Verb(string v1, string v2, string v3)
+            : this(v1, CreatePresentSimpleThirdSingularForm(v1), v2, v3)
+        {
+        }
+
+	    protected Verb(string v1, string presentSimpleThirdSingular, string v2, string v3) 
+            : base(v1)
 		{
 			PersonNumber = VerbPersonNumber.Infinitive;
 			Form = VerbForms.V1;
+
 			this.v1 = v1;
+	        forms.Add(v1);
 			this.v2 = v2;
+	        forms.Add(v2);
 			this.v3 = v3;
+	        forms.Add(v3);
 			vIng = CreateVIngForm(v1);
-			presentSimpleThirdSingular = CreatePresentSimpleThirdSingularForm(v1);
+	        forms.Add(vIng);
+	        this.presentSimpleThirdSingular = presentSimpleThirdSingular;
+	        forms.Add(presentSimpleThirdSingular);
 		}
 
 		private static string CreateVIngForm(string v1)
@@ -51,16 +65,12 @@ namespace Hazzik.FluentEnglishTimes
 
 		public VerbPersonNumber PersonNumber { get; set; }
 
-		public virtual string GetV1(SentenceState state)
+		public virtual string GetV1()
 		{
-			if (state == SentenceState.None && PersonNumber == VerbPersonNumber.ThirdSingular)
-			{
-				return presentSimpleThirdSingular;
-			}
-			return v1;
+		    return PersonNumber == VerbPersonNumber.ThirdSingular ? presentSimpleThirdSingular : v1;
 		}
 
-		private static string CreatePresentSimpleThirdSingularForm(string infinitive)
+	    private static string CreatePresentSimpleThirdSingularForm(string infinitive)
 		{
 			if (infinitive.EndsWith("y"))
 			{
@@ -95,12 +105,12 @@ namespace Hazzik.FluentEnglishTimes
 			return vIng;
 		}
 
-		public override string ToString(SentenceState state)
+		public override string ToString()
 		{
 			switch (Form)
 			{
 				case VerbForms.V1:
-					return GetV1(state);
+					return GetV1();
 				case VerbForms.V2:
 					return GetV2();
 				case VerbForms.V3:
@@ -114,14 +124,14 @@ namespace Hazzik.FluentEnglishTimes
 
 		private static IList<Verb> InitVerbs()
 		{
-			var verbs = new List<Verb>
-			            	{
-			            		new ToBe(),
-			            		new ToHave(),
-			            		new Will(),
-			            		new ToDo()
-			            	};
-			return verbs;
+		    return new List<Verb>
+			           {
+			               new ToBe(),
+			               new Verb("have", "has", "had", "had"),
+			               new Verb("will", "will", "would", String.Empty),
+			               new Verb("shall", "shall", "should", String.Empty),
+			               new Verb("do", "did", "done")
+			           };
 		}
 
 		public static Verb Create(string verbString)
@@ -134,12 +144,12 @@ namespace Hazzik.FluentEnglishTimes
 
 		public virtual bool IsMatch(string verbString)
 		{
-			return GetV1(SentenceState.None) == verbString || GetV2() == verbString || GetV3() == verbString;
+		    return forms.Contains(verbString);
 		}
 
 		protected virtual Verb Clone()
 		{
-			return new Verb(GetV1(SentenceState.None), GetV2(), GetV3());
+		    return new Verb(v1, presentSimpleThirdSingular, v2, v3);
 		}
 	}
 }

@@ -69,7 +69,11 @@ namespace Hazzik.FluentEnglishTimes
 
 			state |= SentenceState.Future;
 
-			words.Insert(1, Verb.Create("will"));
+		    string verbString = GetPersonNumber(words[0]) == VerbPersonNumber.FirstSingular
+		                            ? "shall"
+		                            : "will";
+
+		    words.Insert(1, Verb.Create(verbString));
 
 			return this;
 		}
@@ -87,13 +91,13 @@ namespace Hazzik.FluentEnglishTimes
 
 		public override string ToString()
 		{
-			FirstVerb.PersonNumber = GetPersonNumber(words.ToList()[0]);
-			return string.Join(" ", words.Select(w => w.ToString(state)));
+		    FirstVerb.PersonNumber = GetPersonNumber(words[0]);
+			return string.Join(" ", words.Select(w => w.ToString()));
 		}
 
-		private VerbPersonNumber GetPersonNumber(Word noun)
+		private static VerbPersonNumber GetPersonNumber(Word noun)
 		{
-			switch (noun.ToString(state))
+			switch (noun.ToString())
 			{
 				case "I":
 					{

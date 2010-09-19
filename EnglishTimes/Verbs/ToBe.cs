@@ -4,11 +4,12 @@ namespace Hazzik.FluentEnglishTimes.Verbs
 {
 	internal class ToBe : Verb
 	{
-		public ToBe() : base("be", String.Empty, String.Empty)
-		{
-		}
+        public ToBe()
+            : base("be", String.Empty, String.Empty)
+        {
+        }
 
-		public override string GetV1(SentenceState state)
+	    public override string GetV1()
 		{
 			switch (PersonNumber)
 			{

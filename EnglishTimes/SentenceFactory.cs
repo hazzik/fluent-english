@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Hazzik.FluentEnglishTimes
 {
-	public class SentenceFactory
+	public static class SentenceFactory
 	{
 		public static Sentence CreateSentence(string sentence)
 		{

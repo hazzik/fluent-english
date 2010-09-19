@@ -67,7 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Verbs\ToDo.cs" />
     <Compile Include="IPassive.cs" />
     <Compile Include="IPast.cs" />
     <Compile Include="IProgressive.cs" />
@@ -80,11 +79,9 @@
     <Compile Include="SentenceFactory.cs" />
     <Compile Include="SentenceState.cs" />
     <Compile Include="Verbs\ToBe.cs" />
-    <Compile Include="Verbs\ToHave.cs" />
     <Compile Include="Verb.cs" />
     <Compile Include="VerbForms.cs" />
     <Compile Include="VerbPersonNumber.cs" />
-    <Compile Include="Verbs\Will.cs" />
     <Compile Include="Word.cs" />
   </ItemGroup>
   <ItemGroup>

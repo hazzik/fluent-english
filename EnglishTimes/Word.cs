@@ -9,7 +9,7 @@ namespace Hazzik.FluentEnglishTimes
 			this.word = word;
 		}
 
-		public virtual string ToString(SentenceState state)
+		public override string ToString()
 		{
 			return word;
 		}
