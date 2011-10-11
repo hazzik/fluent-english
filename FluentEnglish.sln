@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEnglish", "FluentEnglish\FluentEnglish.csproj", "{F293BA05-FCDE-4F41-B26D-9CC6B660F91B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEnglish.Tests", "FluentEnglish.Tests\FluentEnglish.Tests.csproj", "{C6FC2680-5F7B-4970-80E6-554F7FB0EB9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F293BA05-FCDE-4F41-B26D-9CC6B660F91B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F293BA05-FCDE-4F41-B26D-9CC6B660F91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F293BA05-FCDE-4F41-B26D-9CC6B660F91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F293BA05-FCDE-4F41-B26D-9CC6B660F91B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6FC2680-5F7B-4970-80E6-554F7FB0EB9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6FC2680-5F7B-4970-80E6-554F7FB0EB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6FC2680-5F7B-4970-80E6-554F7FB0EB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6FC2680-5F7B-4970-80E6-554F7FB0EB9E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
