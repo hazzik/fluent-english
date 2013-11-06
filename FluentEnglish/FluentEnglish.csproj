@@ -67,12 +67,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INegation.cs" />
     <Compile Include="IPassive.cs" />
     <Compile Include="IPast.cs" />
     <Compile Include="IProgressive.cs" />
     <Compile Include="IPerfect.cs" />
     <Compile Include="IActive.cs" />
     <Compile Include="IFuture.cs" />
+    <Compile Include="ISentance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularVerb.cs" />
     <Compile Include="Sentence.cs" />

@@ -1,7 +1,7 @@
 namespace Hazzik.FluentEnglishTimes
 {
-	public interface IPast
-	{
-		void Past();
-	}
+    public interface IPast : INegation
+    {
+        INegation Past();
+    }
 }

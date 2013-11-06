@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Hazzik.FluentEnglishTimes
 {
-	public class Sentence : IPassive
+    public class Sentence : IPassive
 	{
 		private readonly IList<Word> words;
 		private SentenceState state = SentenceState.None;
@@ -78,13 +78,13 @@ namespace Hazzik.FluentEnglishTimes
 			return this;
 		}
 
-		public void Past()
+		public INegation Past()
 		{
 			state |= SentenceState.Past;
 
 			FirstVerb.Form = VerbForms.V2;
 
-			return;
+		    return this;
 		}
 
 		#endregion
@@ -95,7 +95,23 @@ namespace Hazzik.FluentEnglishTimes
 			return string.Join(" ", words.Select(w => w.ToString()));
 		}
 
-		private static VerbPersonNumber GetPersonNumber(Word noun)
+	    public ISentance Negative()
+	    {
+	        if (!state.HasFlag(SentenceState.Perfect) &&
+	            !state.HasFlag(SentenceState.Progressive) &&
+	            !state.HasFlag(SentenceState.Future) &&
+	            !state.HasFlag(SentenceState.Passive))
+	        {
+	            var form = FirstVerb.Form;
+	            FirstVerb.Form = VerbForms.V1;
+	            words.Insert(1, Verb.Create("do"));
+	            FirstVerb.Form = form;
+	        }
+	        words.Insert(2, new Word("not"));
+	        return this;
+	    }
+
+	    private static VerbPersonNumber GetPersonNumber(Word noun)
 		{
 			switch (noun.ToString())
 			{
