@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xunit;
 
 namespace Hazzik.FluentEnglishTimes.Test
@@ -67,6 +67,13 @@ namespace Hazzik.FluentEnglishTimes.Test
 		}
 
 		[Fact]
+		public void PastPerfectProgressive()
+		{
+			Sentence sentence = SentenceFactory.CreateSentence("I do by it");
+			Assert.Throws<NotSupportedException>(() => sentence.Passive().Progressive().Perfect().Past());
+		}
+
+		[Fact]
 		public void FutureSimple()
 		{
 			Sentence sentence = SentenceFactory.CreateSentence("I do by it");
@@ -92,6 +99,13 @@ namespace Hazzik.FluentEnglishTimes.Test
 		}
 
 		[Fact]
+		public void FuturePerfectProgressive()
+		{
+			Sentence sentence = SentenceFactory.CreateSentence("I do by it");
+			Assert.Throws<NotSupportedException>(() => sentence.Passive().Progressive().Perfect().Future());
+		}
+
+		[Fact]
 		public void FutureInThePastSimple()
 		{
 			Sentence sentence = SentenceFactory.CreateSentence("I do by it");
@@ -100,6 +114,13 @@ namespace Hazzik.FluentEnglishTimes.Test
 			Assert.Equal("I should be done by it", str);
 		}
 
+	        [Fact]
+		public void FutureInThePastProgressive()
+		{
+			Sentence sentence = SentenceFactory.CreateSentence("I do it");
+			Assert.Throws<NotSupportedException>(() => sentence.Passive().Progressive().Future().Past());
+	        }
+
 		[Fact]
 		public void FutureInThePastPerfect()
 		{
@@ -107,6 +128,13 @@ namespace Hazzik.FluentEnglishTimes.Test
 			sentence.Passive().Perfect().Future().Past();
 			string str = sentence.ToString();
 			Assert.Equal("I should have been done by it", str);
+		}
+
+		[Fact]
+		public void FutureInThePastPerfectProgressive()
+		{
+			Sentence sentence = SentenceFactory.CreateSentence("I do it");
+			Assert.Throws<NotSupportedException>(() => sentence.Passive().Progressive().Perfect().Future().Past());
 		}
 	}
 }
