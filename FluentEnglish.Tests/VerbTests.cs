@@ -13,7 +13,7 @@ namespace Hazzik.FluentEnglishTimes.Test
 		}
 
 		[Fact]
-		public void EsAfterYAfterVovel()
+		public void EsAfterYAfterVowel()
 		{
 			var verb = Verb.Create("play");
 			verb.PersonNumber = VerbPersonNumber.ThirdSingular;
